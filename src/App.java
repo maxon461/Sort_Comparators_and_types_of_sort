@@ -27,16 +27,46 @@ public class App {
             System.out.println(car.getBrand() + " " + car.getColor() + " " + car.getYear());
         }
 
-        Arrays.sort(cars, Car.complexComparator);
 
-        // print the sorted array
-        System.out.println("Sorted by brand, color, and year:");
+        //insert sort : 
+      
+
+        int n = cars.length;
+        for(int i=0;i<n;i++){
+            Car temp = cars[i];
+            int j=i-1;
+            while (j>=0 && (Car.complexComparator.compare(cars[j], temp))>0) {
+                cars[j+1] = cars[j];
+                j--;
+                
+            }
+            cars[j+1] = temp;
+        }
+
+        System.out.println("Sorted by year:");
         for (Car car : cars) {
             System.out.println(car.getBrand() + " " + car.getColor() + " " + car.getYear());
         }
+
         
-        //TODO  2 types of sort (Selection , insertion );
-        
+        //insert sort
+        for(int i=0;i<n;i++){
+            int minIndex = i;
+            for(int j=i+1;j<n;j++){
+                if(Car.compoundComparator.compare(cars[j], cars[minIndex])<0){
+                    minIndex = j;
+                }
+            }
+            if(minIndex != i ){
+                Car temp = cars[i];
+                cars[i] = cars[minIndex];
+                cars[minIndex]  = temp;
+            }
+        }
+        System.out.println("Sorted by brand:");
+        for (Car car : cars) {
+            System.out.println(car.getBrand() + " " + car.getColor() + " " + car.getYear());
+        }
 
     }   
 }
